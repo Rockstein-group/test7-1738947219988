@@ -1,0 +1,36 @@
+---
+import { Image } from "astro:assets";
+import Partner from "./Partner.astro";
+// import imgimages_gii_logo_webp from "../../public/images/gii_logo_square.svg";
+---
+
+<section class="bg-[#22242A] py-16 relative">
+  <div class="container mx-auto text-center flex flex-col text-white gap-24">
+    <div class="space-y-6 xl:max-w-[1088px] mx-auto">
+      <h2 class="font-bold text-[50px] leading-[75px] text-center">
+        Résultats et références
+      </h2>
+      <p class="text-[25px] leading-[1.5]">
+        Plus de 400 clients partenaires sur la Suisse et l'Europe pour
+        construire ensemble le numérique de demain, dès maintenant.
+      </p>
+    </div>
+    <div class="bg-white py-12 px-24 rounded-2xl flex items-center justify-between">
+      <div class="text-[#253946] text-left lg:max-w-[530px] flex flex-col gap-8">
+        <h3 class="font-bold text-[40px] leading-snug">
+          Notre engagement sur la performance.
+        </h3>
+        <p class="text-2xl">
+          Nous nous engageons sur les résultats que nous définissons ensemble.
+        </p>
+      </div>
+      <Image
+        src="/images/result_img.svg"
+        alt="Result Image"
+        width={434}
+        height={398}
+      />
+    </div>
+  </div>
+  <Partner />
+</section>

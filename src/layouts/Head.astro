@@ -1,0 +1,37 @@
+---
+interface HeadProps {
+  seo?: {
+    title?: string;
+    description?: string;
+    keywords?: string;
+    canonical?: string;
+    image?: string;
+    type?: string;
+    themeColor?: string;
+  };
+  title?: string; // overrides seo.title
+}
+
+const { seo = {}, title } = Astro.props as HeadProps;
+
+// Fallback to the prop title if present, otherwise use seo.title
+const finalTitle = title ?? seo.title;
+---
+
+<head>
+  {finalTitle && <title>{finalTitle}</title>}
+  {seo.description && <meta name="description" content={seo.description} />}
+  {seo.keywords && <meta name="keywords" content={seo.keywords} />}
+  {seo.canonical && <link rel="canonical" href={seo.canonical} />}
+  {seo.image && <meta property="og:image" content={seo.image} />}
+  {seo.type && <meta property="og:type" content={seo.type} />}
+  {seo.themeColor && <meta name="theme-color" content={seo.themeColor} />}
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <meta name="generator" content={Astro.generator} />
+  <link
+  rel="icon"
+  type="image/svg+xml"
+  href="/favicons/fav-icon.svg"
+/>
+</head>

@@ -1,0 +1,39 @@
+---
+import { Image } from "astro:assets";
+import ContactForm from "./ContactForm.astro";
+// import imgimages_gii_logo_webp from "../../public/images/gii_logo_square.svg";
+---
+
+<section class="pt-24 pb-44 bg-[#243946] relative">
+  <div class="container mx-auto text-white flex items-start gap-20">
+    <div class="flex flex-col gap-8">
+      <div class="flex flex-col gap-10">
+        <h2 class="text-[50px] leading-[75px] font-bold">
+          <span class="text-[#96F50A]">Simon Cardon</span> est notre fer de lance!
+        </h2>
+        <p class="text-[25px] leading-snug">
+          Il oeuvre pour un numérique plus éthique, souverain et écologique
+          depuis plus de 9 ans.
+        </p>
+        <p class="text-[25px] leading-snug">Nhésitez pas à le contacter !</p>
+      </div>
+      <Image
+        src="/images/simon_image.webp"
+        alt="Simon Cardon"
+        class="absolute bottom-0"
+        width={425}
+        height={647.52}
+      />
+    </div>
+    <div>
+      <div
+        class="bg-white rounded-2xl px-10 pt-16 pb-12 lg:min-w-[663px] lg:max-w-[663px] text-[#253946] flex flex-col gap-16"
+      >
+        <h2 class="text-center text-[32px] leading-snug font-bold">
+          Envoyez-nous un message.
+        </h2>
+       <ContactForm />
+      </div>
+    </div>
+  </div>
+</section>
