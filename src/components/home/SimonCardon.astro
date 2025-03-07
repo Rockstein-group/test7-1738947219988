@@ -4,8 +4,8 @@ import ContactForm from "./ContactForm.astro";
 // import imgimages_gii_logo_webp from "../../public/images/gii_logo_square.svg";
 ---
 
-<section class="pt-24 pb-44 bg-[#243946] relative">
-  <div class="container mx-auto text-white flex items-start gap-20">
+<section class="pt-24 pb-44 bg-[#243946] relative px-4">
+  <div class="container mx-auto text-white flex flex-col items-start lg:flex-row lg:gap-20">
     <div class="flex flex-col gap-8">
       <div class="flex flex-col gap-10">
         <h2 class="text-[50px] leading-[75px] font-bold">
@@ -20,7 +20,7 @@ import ContactForm from "./ContactForm.astro";
       <Image
         src="/images/simon_image.webp"
         alt="Simon Cardon"
-        class="absolute bottom-0"
+        class="relative lg:absolute bottom-0"
         width={425}
         height={647.52}
       />
