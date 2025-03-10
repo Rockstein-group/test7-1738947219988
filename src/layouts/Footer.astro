@@ -4,11 +4,11 @@ import { Image } from "astro:assets";
 import "../styles/global.css";
 ---
 
-<footer class="bg-[#22252a]">
+<footer class="bg-[#22252a] px-4">
   <div class="container mx-auto">
     <nav class="flex items-center justify-between flex-col lg:flex-row lg:gap-0 gap-6 py-10">
       <!-- Logo -->
-      <div class="flex flex-col gap-6 w-full px-4 items-center lg:items-start lg:w-auto lg:px-0">
+      <div class="flex flex-col gap-6 w-full items-center lg:items-start lg:w-auto lg:px-0">
         <p class="text-lg text-white">
           Hosted by <a href="#" class="text-[#96F50A] inline-block relative before:content-[''] before:absolute before:h-[1px] before:left-0 before:right-0 before:bg-[#96F50A] before:bottom-[5px]">DigitalForest</a>
         </p>
@@ -29,18 +29,18 @@ import "../styles/global.css";
       </div>
 
       <!-- Menu -->
-      <div  class="lg:px-0 px-4 lg:w-auto w-full">
+      <div  class="lg:px-0 lg:w-auto w-full">
         <ul
-        class="flex space-x-2 justify-center lg:space-x-6 lg:justify-start text-gray-700 py-1.5 bg-white rounded-full lg:px-16 w-full"
+        class="flex space-x-4 md:space-x-6 lg:space-x-4 xl:space-x-6 justify-center lg:justify-start text-gray-700 py-[14px] bg-white rounded-full lg:px-6 xl:px-16 w-full"
       >
         <li>
-          <a href="#" class="text-black text-base font-semibold">Pourquoi</a>
+          <a href="#vision" class="text-black text-base font-semibold">Vision</a>
         </li>
         <li>
-          <a href="#" class="text-black text-base font-semibold">Mission</a>
+          <a href="#mission" class="text-black text-base font-semibold">Mission</a>
         </li>
         <li>
-          <a href="#" class="text-black text-base font-semibold">Solutions</a>
+          <a href="#solution" class="text-black text-base font-semibold">Solutions</a>
         </li>
         <li>
           <a href="#" class="text-black text-base font-semibold">Références</a>
@@ -48,7 +48,7 @@ import "../styles/global.css";
       </ul>
       </div>
 
-      <div class="flex flex-col gap-6 w-full lg:w-auto lg:px-0 px-4">
+      <div class="flex flex-col gap-6 w-full lg:w-auto lg:px-0">
         <Image
           src="/images/logo_powered_by_bubble_go.svg"
           alt="Powered by Bubble Green Logo"
