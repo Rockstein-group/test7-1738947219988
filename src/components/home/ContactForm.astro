@@ -7,6 +7,7 @@ import { Image } from "astro:assets";
   <div class="flex flex-col gap-4">
     <label for="name" class="font-semibold text-xs">Nom et prénom</label>
     <input
+      name="name"
       type="text"
       id="name"
       class="min-h-[56px] p-4 rounded-lg border border-solid border-[#253946]"
@@ -17,6 +18,7 @@ import { Image } from "astro:assets";
   <div class="flex flex-col gap-4">
     <label for="company" class="font-semibold text-xs">Entreprise</label>
     <input
+      name="company"
       type="text"
       id="company"
       class="min-h-[56px] p-4 rounded-lg border border-solid border-[#253946]"
@@ -27,6 +29,7 @@ import { Image } from "astro:assets";
   <div class="flex flex-col gap-4">
     <label for="email" class="font-semibold text-xs">Email</label>
     <input
+      name="email"
       type="email"
       id="email"
       class="min-h-[56px] p-4 rounded-lg border border-solid border-[#253946]"
@@ -38,6 +41,7 @@ import { Image } from "astro:assets";
     <label for="message" class="font-semibold text-xs">Message</label>
     <textarea
       rows="5"
+      name="message"
       id="message"
       class="min-h-[56px] p-4 rounded-lg border border-solid border-[#253946]"
       placeholder="Votre message... "
