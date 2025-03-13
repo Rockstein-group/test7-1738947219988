@@ -1,0 +1,400 @@
+---
+import "plyr/dist/plyr.css";
+---
+
+<div id="video-player">
+  <video id="player" playsinline>
+    <source src="/video/sample_video.mp4" type="video/mp4" />
+  </video>
+</div>
+
+<!-- Custom Controls -->
+<div
+  class="custom-controls text-[#111827] flex items-center justify-between pt-6"
+>
+  <div class="flex items-center gap-4">
+    <button
+      class="w-[26px] h-[26px] flex items-center justify-center transition-all hover:bg-black/10 rounded"
+      id="rewind"
+    >
+      <svg
+        width="21"
+        height="20"
+        viewBox="0 0 21 20"
+        class="w-5 h-5"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M1.39307 2.98328V8.44762M1.39307 8.44762H6.8574M1.39307 8.44762L5.61882 4.47687C6.87645 3.22136 8.50804 2.40859 10.2678 2.16101C12.0275 1.91342 13.82 2.24444 15.3752 3.10419C16.9305 3.96394 18.1642 5.30585 18.8904 6.92771C19.6167 8.54958 19.7962 10.3635 19.4019 12.0963C19.0076 13.8291 18.0608 15.3867 16.7043 16.5346C15.3477 17.6825 13.6548 18.3584 11.8807 18.4605C10.1066 18.5626 8.34733 18.0854 6.86802 17.1007C5.38871 16.1161 4.26949 14.6773 3.67898 13.0012"
+          stroke="#111827"
+          stroke-width="2.73217"
+          stroke-linecap="round"
+          stroke-linejoin="round"></path>
+      </svg>
+    </button>
+    <button
+      class="w-[26px] h-[26px] flex items-center justify-center transition-all hover:bg-black/10 rounded"
+      id="play-pause"
+    >
+      <svg
+        width="18"
+        height="21"
+        viewBox="0 0 18 21"
+        class="w-5 h-5"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M1.93262 1.39844L15.7453 10.278L1.93262 19.1576V1.39844Z"
+          fill="#111827"
+          stroke="#111827"
+          stroke-width="2.73217"
+          stroke-linecap="round"
+          stroke-linejoin="round"></path>
+      </svg>
+    </button>
+    <button
+      class="w-[26px] h-[26px] flex items-center justify-center transition-all hover:bg-black/10 rounded"
+      id="fast-forward"
+    >
+      <svg
+        width="22"
+        height="20"
+        viewBox="0 0 22 20"
+        class="w-5 h-5"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M20.2821 2.99001V8.45435M20.2821 8.45435H14.8177M20.2821 8.45435L16.0654 4.4836C14.8092 3.22656 13.1784 2.41187 11.4189 2.16229C9.65934 1.91272 7.86635 2.24177 6.31009 3.09988C4.75383 3.95799 3.51863 5.29865 2.79061 6.91984C2.06259 8.54104 1.8812 10.3549 2.27378 12.0882C2.66635 13.8214 3.61162 15.3801 4.96714 16.5294C6.32266 17.6787 8.01499 18.3563 9.78911 18.4601C11.5632 18.5639 13.323 18.0882 14.8033 17.1049C16.2836 16.1215 17.4042 14.6836 17.9962 13.008"
+          stroke="#111827"
+          stroke-width="2.73217"
+          stroke-linecap="round"
+          stroke-linejoin="round"></path>
+      </svg>
+    </button>
+    <span class="flex items-center gap-2 text-sm">
+      <span id="current-time">0:00</span>/<span id="total-time">0:00</span>
+    </span>
+  </div>
+  <div class="flex items-center gap-6">
+    <button
+      class="w-[26px] h-[26px] flex items-center justify-center transition-all hover:bg-black/10 rounded"
+      id="disable-video"
+    >
+      <svg
+        width="21"
+        height="21"
+        viewBox="0 0 21 21"
+        class="w-5 h-5"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M1.53325 0.203125L0.163574 1.57281L3.10785 4.51708H2.32055C2.03452 4.51708 1.7602 4.63071 1.55794 4.83296C1.35569 5.03522 1.24206 5.30954 1.24206 5.59557V16.3805C1.24206 16.6665 1.35569 16.9408 1.55794 17.1431C1.7602 17.3453 2.03452 17.4589 2.32055 17.4589H15.2624C15.4781 17.4589 15.683 17.3727 15.8448 17.2648L19.2852 20.6944L20.6549 19.3247M20.6549 5.05632L16.3409 9.37028V5.59557C16.3409 5.30954 16.2273 5.03522 16.025 4.83296C15.8228 4.63071 15.5484 4.51708 15.2624 4.51708H8.59735L20.6549 16.5746V5.05632Z"
+          fill="#111827"></path>
+      </svg>
+    </button>
+    <button
+      class="w-[26px] h-[26px] flex items-center justify-center transition-all hover:bg-black/10 rounded"
+      id="volume-control"
+    >
+      <svg
+        width="23"
+        height="17"
+        viewBox="0 0 23 17"
+        class="w-5 h-5"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M10.2336 2.00122L5.40303 5.86568H1.53857V11.6624H5.40303L10.2336 15.5268V2.00122Z"
+          fill="#111827"></path>
+        <path
+          d="M18.0301 1.93359C19.8413 3.74533 20.8588 6.20223 20.8588 8.76402C20.8588 11.3258 19.8413 13.7827 18.0301 15.5944M14.6198 5.34398C15.5254 6.24984 16.0341 7.4783 16.0341 8.75919C16.0341 10.0401 15.5254 11.2685 14.6198 12.1744M10.2336 2.00122L5.40303 5.86568H1.53857V11.6624H5.40303L10.2336 15.5268V2.00122Z"
+          stroke="#111827"
+          stroke-width="2.73217"
+          stroke-linecap="round"
+          stroke-linejoin="round"></path>
+      </svg>
+    </button>
+    <button
+      class="w-[26px] h-[26px] flex items-center justify-center transition-all hover:bg-black/10 rounded"
+      id="quality-control"
+    >
+      <svg
+        width="18"
+        height="18"
+        viewBox="0 0 18 18"
+        class="w-5 h-5"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M17.6962 11.2635L16.1709 10.3827C16.3249 9.55205 16.3249 8.6999 16.1709 7.86924L17.6962 6.98845C17.8716 6.88819 17.9504 6.68053 17.8931 6.48718C17.4957 5.21254 16.819 4.05964 15.9346 3.10007C15.7985 2.95328 15.5766 2.91747 15.4047 3.01772L13.8794 3.89851C13.2385 3.34713 12.501 2.92105 11.7025 2.64178V0.883774C11.7025 0.683268 11.5629 0.507826 11.3659 0.464861C10.0519 0.171264 8.70567 0.185585 7.45609 0.464861C7.25917 0.507826 7.11953 0.683268 7.11953 0.883774V2.64536C6.32467 2.92821 5.5871 3.35429 4.94262 3.9021L3.42092 3.0213C3.24548 2.92105 3.02707 2.95328 2.89102 3.10365C2.00665 4.05964 1.32994 5.21254 0.932509 6.49076C0.871642 6.68411 0.953992 6.89177 1.12943 6.99203L2.65471 7.87282C2.50075 8.70348 2.50075 9.55563 2.65471 10.3863L1.12943 11.2671C0.953992 11.3673 0.875222 11.575 0.932509 11.7683C1.32994 13.043 2.00665 14.1959 2.89102 15.1555C3.02707 15.3023 3.24906 15.3381 3.42092 15.2378L4.9462 14.357C5.5871 14.9084 6.32467 15.3345 7.12311 15.6138V17.3753C7.12311 17.5758 7.26275 17.7513 7.45968 17.7943C8.7737 18.0878 10.12 18.0735 11.3695 17.7943C11.5665 17.7513 11.7061 17.5758 11.7061 17.3753V15.6138C12.501 15.3309 13.2385 14.9048 13.883 14.357L15.4083 15.2378C15.5837 15.3381 15.8021 15.3058 15.9382 15.1555C16.8226 14.1995 17.4993 13.0466 17.8967 11.7683C17.9504 11.5714 17.8716 11.3638 17.6962 11.2635ZM9.41102 11.9903C7.83204 11.9903 6.54666 10.705 6.54666 9.12598C6.54666 7.547 7.83204 6.26161 9.41102 6.26161C10.99 6.26161 12.2754 7.547 12.2754 9.12598C12.2754 10.705 10.99 11.9903 9.41102 11.9903Z"
+          fill="#111827"></path>
+      </svg>
+    </button>
+    <button
+      class="w-[26px] h-[26px] flex items-center justify-center transition-all hover:bg-black/10 rounded"
+      id="transcription-of-the-track-into-text"
+    >
+      <svg
+        width="19"
+        height="19"
+        viewBox="0 0 19 19"
+        class="w-5 h-5"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M2.79834 0.763672C1.68834 0.763672 0.79834 1.65367 0.79834 2.76367V16.7637C0.79834 17.8737 1.68834 18.7637 2.79834 18.7637H16.7983C17.9083 18.7637 18.7983 17.8737 18.7983 16.7637V2.76367C18.7983 1.65367 17.9083 0.763672 16.7983 0.763672H2.79834ZM2.79834 2.76367H16.7983V16.7637H2.79834V2.76367ZM4.79834 4.76367V6.76367H14.7983V4.76367H4.79834ZM4.79834 8.76367V10.7637H14.7983V8.76367H4.79834ZM4.79834 12.7637V14.7637H11.7983V12.7637H4.79834Z"
+          fill="black"></path>
+      </svg>
+    </button>
+    <button
+      class="w-[26px] h-[26px] flex items-center justify-center transition-all hover:bg-black/10 rounded"
+      id="fullscreen"
+    >
+      <svg
+        width="16"
+        height="16"
+        viewBox="0 0 16 16"
+        class="w-[18px] h-[18px]"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M10.0491 1.61719H14.1473M14.1473 1.61719V5.71544M14.1473 1.61719L9.36601 6.39849M5.9508 13.912H1.85254M1.85254 13.912V9.8137M1.85254 13.912L6.63384 9.13066"
+          stroke="#111827"
+          stroke-width="2.73217"
+          stroke-linecap="round"
+          stroke-linejoin="round"></path>
+      </svg>
+    </button>
+  </div>
+</div>
+
+<script>
+  import Plyr from "plyr";
+
+  document.addEventListener("astro:after-swap", () => {
+    setupPlyr();
+  });
+
+  function formatTime(seconds) {
+    const minutes = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${minutes}:${secs < 10 ? "0" : ""}${secs}`;
+  }
+
+  function setupPlyr() {
+    const player = new Plyr("#player", {
+      controls: ["play-large", "progress"],
+    });
+    let volumeSliderVisible = false
+let volumeContainer = null
+    const volumeControlBtn = document.getElementById("volume-control")
+    const currentTimeEl = document.getElementById("current-time");
+    const totalTimeEl = document.getElementById("total-time");
+
+    const playPauseBtn = document.getElementById("play-pause");
+    const rewindBtn = document.getElementById("rewind");
+    const fastForwardBtn = document.getElementById("fast-forward");
+    const fullscreenBtn = document.getElementById("fullscreen");
+
+    player.on("loadedmetadata", () => {
+      totalTimeEl.textContent = formatTime(player.duration);
+    });
+
+    player.on("timeupdate", () => {
+      currentTimeEl.textContent = formatTime(player.currentTime);
+    });
+
+    // Custom Controls
+    playPauseBtn.addEventListener("click", () => {
+      if (player.paused) {
+        player.play();
+      } else {
+        player.pause();
+      }
+      updatePlayPauseIcon();
+    });
+
+    // Add this function to update the play/pause icon
+    function updatePlayPauseIcon() {
+      const playPauseBtn = document.getElementById("play-pause");
+
+      if (player.paused) {
+        // Show play icon
+        playPauseBtn.innerHTML = `
+      <svg width="18" height="21" viewBox="0 0 18 21" class="w-5 h-5" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M1.93262 1.39844L15.7453 10.278L1.93262 19.1576V1.39844Z" fill="#111827" stroke="#111827" stroke-width="2.73217" stroke-linecap="round" stroke-linejoin="round"></path>
+      </svg>
+    `;
+      } else {
+        // Show pause icon
+        playPauseBtn.innerHTML = `
+      <svg width="18" height="21" viewBox="0 0 18 21" class="w-5 h-5" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M2.93262 1.39844H6.93262V19.1576H2.93262V1.39844Z" fill="#111827" stroke="#111827" stroke-width="2.73217" stroke-linecap="round" stroke-linejoin="round"></path>
+        <path d="M11.9326 1.39844H15.9326V19.1576H11.9326V1.39844Z" fill="#111827" stroke="#111827" stroke-width="2.73217" stroke-linecap="round" stroke-linejoin="round"></path>
+      </svg>
+    `;
+      }
+    }
+
+    // Create volume slider container
+function createVolumeSlider() {
+  // Create container for the volume slider
+  volumeContainer = document.createElement("div")
+  volumeContainer.className =
+    "volume-slider-container absolute bottom-10 bg-white shadow-md rounded p-2 flex flex-col items-center"
+  volumeContainer.style.width = "40px"
+  volumeContainer.style.height = "120px"
+
+  // Create the volume slider
+  const volumeSlider = document.createElement("input")
+  volumeSlider.type = "range"
+  volumeSlider.min = "0"
+  volumeSlider.max = "1"
+  volumeSlider.step = "0.01"
+  volumeSlider.value = player.volume
+  volumeSlider.className = "w-full h-[80px] appearance-none bg-gray-200 rounded-full"
+  volumeSlider.style.writingMode = "bt-lr" /* IE */
+  volumeSlider.style.WebkitAppearance = "slider-vertical" /* WebKit */
+  volumeSlider.style.transform = "rotate(180deg)"
+
+  // Use Plyr's built-in volume control
+  volumeSlider.addEventListener("input", (e) => {
+    const newVolume = Number.parseFloat(e.target.value)
+    player.volume = newVolume // This uses Plyr's built-in volume control
+  })
+
+  volumeContainer.appendChild(volumeSlider)
+
+  // Position the volume slider relative to the volume button
+  const buttonRect = volumeControlBtn.getBoundingClientRect()
+  volumeContainer.style.left = `${buttonRect.left}px`
+
+  // Add the volume slider to the DOM
+  document.querySelector(".custom-controls").appendChild(volumeContainer)
+}
+
+// Update volume icon based on volume level
+function updateVolumeIcon() {
+  const isMuted = player.muted || player.volume === 0
+  const volume = player.volume
+
+  if (isMuted) {
+    // Muted icon
+    volumeControlBtn.innerHTML = `
+      <svg width="23" height="17" viewBox="0 0 23 17" class="w-5 h-5" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M10.2336 2.00122L5.40303 5.86568H1.53857V11.6624H5.40303L10.2336 15.5268V2.00122Z" fill="#111827"></path>
+        <path d="M21.5 6L14 13.5" stroke="#111827" stroke-width="2" stroke-linecap="round"></path>
+        <path d="M14 6L21.5 13.5" stroke="#111827" stroke-width="2" stroke-linecap="round"></path>
+      </svg>
+    `
+  } else if (volume < 0.5) {
+    // Low volume icon
+    volumeControlBtn.innerHTML = `
+      <svg width="23" height="17" viewBox="0 0 23 17" class="w-5 h-5" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M10.2336 2.00122L5.40303 5.86568H1.53857V11.6624H5.40303L10.2336 15.5268V2.00122Z" fill="#111827"></path>
+        <path d="M14.6198 5.34398C15.5254 6.24984 16.0341 7.4783 16.0341 8.75919C16.0341 10.0401 15.5254 11.2685 14.6198 12.1744" stroke="#111827" stroke-width="2.73217" stroke-linecap="round" stroke-linejoin="round"></path>
+      </svg>
+    `
+  } else {
+    // Full volume icon
+    volumeControlBtn.innerHTML = `
+      <svg width="23" height="17" viewBox="0 0 23 17" class="w-5 h-5" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M10.2336 2.00122L5.40303 5.86568H1.53857V11.6624H5.40303L10.2336 15.5268V2.00122Z" fill="#111827"></path>
+        <path d="M18.0301 1.93359C19.8413 3.74533 20.8588 6.20223 20.8588 8.76402C20.8588 11.3258 19.8413 13.7827 18.0301 15.5944M14.6198 5.34398C15.5254 6.24984 16.0341 7.4783 16.0341 8.75919C16.0341 10.0401 15.5254 11.2685 14.6198 12.1744M10.2336 2.00122L5.40303 5.86568H1.53857V11.6624H5.40303L10.2336 15.5268V2.00122Z" stroke="#111827" stroke-width="2.73217" stroke-linecap="round" stroke-linejoin="round"></path>
+      </svg>
+    `
+  }
+}
+
+// Toggle volume slider visibility
+function toggleVolumeSlider() {
+  if (volumeSliderVisible) {
+    if (volumeContainer) {
+      volumeContainer.remove()
+      volumeContainer = null
+    }
+    volumeSliderVisible = false
+  } else {
+    createVolumeSlider()
+    volumeSliderVisible = true
+  }
+}
+
+// Toggle mute when double-clicking the volume button
+volumeControlBtn.addEventListener("dblclick", () => {
+  if (player.muted) {
+    player.muted = false
+  } else {
+    player.muted = true
+  }
+})
+
+// Add click event listener to volume control button
+volumeControlBtn.addEventListener("click", (e) => {
+  e.stopPropagation()
+  toggleVolumeSlider()
+})
+
+// Close volume slider when clicking outside
+document.addEventListener("click", (e) => {
+  if (volumeSliderVisible && e.target !== volumeControlBtn && !volumeContainer.contains(e.target)) {
+    toggleVolumeSlider()
+  }
+})
+
+// Listen to Plyr's volume change event to update the icon
+player.on("volumechange", () => {
+  updateVolumeIcon()
+
+  // Update slider value if it exists
+  if (volumeContainer) {
+    const slider = volumeContainer.querySelector('input[type="range"]')
+    if (slider) {
+      slider.value = player.volume
+    }
+  }
+})
+
+    // Add these event listeners to sync the UI with player state
+    player.on("play", () => {
+      updatePlayPauseIcon();
+    });
+
+    player.on("pause", () => {
+      updatePlayPauseIcon();
+    });
+
+    // Initialize the icon state
+    updatePlayPauseIcon();
+    updateVolumeIcon()
+
+    rewindBtn.addEventListener("click", () => {
+      player.rewind(10); // Rewind 10 seconds
+    });
+
+    fastForwardBtn.addEventListener("click", () => {
+      player.forward(10); // Fast forward 10 seconds
+    });
+
+    fullscreenBtn.addEventListener("click", () => {
+      player.fullscreen.toggle();
+    });
+  }
+
+  setupPlyr(); // Initialize on first load
+</script>
+
+<style>
+  #player {
+    max-width: 100%;
+    border-radius: 10px;
+  }
+</style>
