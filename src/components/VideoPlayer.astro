@@ -2,7 +2,7 @@
 import "plyr/dist/plyr.css";
 ---
 
-<div id="video-player">
+<div id="video-player" class="h-[95%]">
   <video id="player" playsinline>
     <source src="/video/sample_video.mp4" type="video/mp4" />
   </video>
@@ -10,9 +10,9 @@ import "plyr/dist/plyr.css";
 
 <!-- Custom Controls -->
 <div
-  class="custom-controls text-[#111827] flex items-center justify-between pt-6"
+  class="custom-controls text-[#111827] flex items-center justify-between gap-2 pt-6"
 >
-  <div class="flex items-center gap-4">
+  <div class="flex items-center gap-2 md:gap-4">
     <button
       class="w-[26px] h-[26px] flex items-center justify-center transition-all hover:bg-black/10 rounded"
       id="rewind"
@@ -78,22 +78,14 @@ import "plyr/dist/plyr.css";
       <span id="current-time">0:00</span>/<span id="total-time">0:00</span>
     </span>
   </div>
-  <div class="flex items-center gap-6">
+  <div class="flex items-center gap-3 md:gap-6">
     <button
       class="w-[26px] h-[26px] flex items-center justify-center transition-all hover:bg-black/10 rounded"
-      id="disable-video"
+      id="toggle-video"
     >
-      <svg
-        width="21"
-        height="21"
-        viewBox="0 0 21 21"
-        class="w-5 h-5"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M1.53325 0.203125L0.163574 1.57281L3.10785 4.51708H2.32055C2.03452 4.51708 1.7602 4.63071 1.55794 4.83296C1.35569 5.03522 1.24206 5.30954 1.24206 5.59557V16.3805C1.24206 16.6665 1.35569 16.9408 1.55794 17.1431C1.7602 17.3453 2.03452 17.4589 2.32055 17.4589H15.2624C15.4781 17.4589 15.683 17.3727 15.8448 17.2648L19.2852 20.6944L20.6549 19.3247M20.6549 5.05632L16.3409 9.37028V5.59557C16.3409 5.30954 16.2273 5.03522 16.025 4.83296C15.8228 4.63071 15.5484 4.51708 15.2624 4.51708H8.59735L20.6549 16.5746V5.05632Z"
-          fill="#111827"></path>
+    <svg width="194" height="181" viewBox="0 0 194 181" class="w-5 h-5" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M3.20033 2.05053C1.86699 3.38386 0.666992 5.25053 0.666992 5.9172C0.666992 6.7172 6.40033 13.5172 13.3337 21.1172C20.267 28.7172 26.0003 35.2505 26.0003 35.5172C26.0003 35.6505 22.0003 36.0505 17.067 36.1839C9.46699 36.4505 7.73366 36.9839 4.80033 39.9172L1.33366 43.2505V90.0505V136.851L5.73366 140.717L10.0003 144.584H69.067H128.134L144 161.917C152.667 171.384 161.067 179.651 162.4 180.051C166.134 181.251 170.8 176.184 169.2 172.717C167.2 168.317 10.9337 0.850532 8.26699 0.0505316C6.93366 -0.216135 4.66699 0.583865 3.20033 2.05053Z" fill="black"/>
+      <path d="M59.6004 36.718C60.267 38.1846 143.734 127.918 144.934 128.318C145.467 128.585 146 125.785 146 122.051C146 118.318 146.267 115.251 146.667 115.251C147.067 115.251 155.734 119.385 166 124.585C176.267 129.651 185.734 133.918 187.2 133.918C193.734 133.918 194 132.451 194 90.8513C194 57.6513 193.734 51.3846 191.867 48.8513C190.8 47.2513 188.934 45.918 187.867 45.918C186.8 45.918 177.067 50.4513 166.134 55.918L146.267 65.7846L145.867 54.5846C145.334 44.5846 144.934 42.8513 142 39.918L138.534 36.5846L98.9337 36.1846C77.2004 36.0513 59.467 36.318 59.6004 36.718Z" fill="black"/>
       </svg>
     </button>
     <button
@@ -193,10 +185,12 @@ import "plyr/dist/plyr.css";
     const player = new Plyr("#player", {
       controls: ["play-large", "progress"],
     });
-    let volumeSliderVisible = false
-let volumeContainer = null
-    const volumeControlBtn = document.getElementById("volume-control")
+    let volumeSliderVisible = false;
+    let volumeContainer = null;
+    const videoEl = document.getElementById("player");
+    const volumeControlBtn = document.getElementById("volume-control");
     const currentTimeEl = document.getElementById("current-time");
+    const toggleVideoEl = document.getElementById("toggle-video");
     const totalTimeEl = document.getElementById("total-time");
 
     const playPauseBtn = document.getElementById("play-pause");
@@ -205,9 +199,13 @@ let volumeContainer = null
     const fullscreenBtn = document.getElementById("fullscreen");
 
     player.on("loadedmetadata", () => {
-      totalTimeEl.textContent = formatTime(player.duration);
-    });
+      const totalTime = document.getElementById("total-time");
+      const duration = player.duration;
 
+      if (!isNaN(duration) && duration > 0) {
+        totalTime.textContent = formatTime(duration);
+      }
+    });
     player.on("timeupdate", () => {
       currentTimeEl.textContent = formatTime(player.currentTime);
     });
@@ -222,146 +220,57 @@ let volumeContainer = null
       updatePlayPauseIcon();
     });
 
+    function getPlayIcon() {
+      return `<svg width="18" height="21" viewBox="0 0 18 21" class="w-5 h-5" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M1.93262 1.39844L15.7453 10.278L1.93262 19.1576V1.39844Z" fill="#111827" stroke="#111827" stroke-width="2.73217" stroke-linecap="round" stroke-linejoin="round"></path>
+      </svg>
+    `;
+    }
+
+    function getPauseIcon() {
+      return `<svg width="18" height="21" viewBox="0 0 18 21" class="w-5 h-5" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M2.93262 1.39844H6.93262V19.1576H2.93262V1.39844Z" fill="#111827" stroke="#111827" stroke-width="2.73217" stroke-linecap="round" stroke-linejoin="round"></path>
+        <path d="M11.9326 1.39844H15.9326V19.1576H11.9326V1.39844Z" fill="#111827" stroke="#111827" stroke-width="2.73217" stroke-linecap="round" stroke-linejoin="round"></path>
+      </svg>
+    `;
+    }
+
+    function getDisabledCameraIcon() {
+      return `<svg width="194" height="181" viewBox="0 0 194 181" class="w-5 h-5" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M3.20033 2.05053C1.86699 3.38386 0.666992 5.25053 0.666992 5.9172C0.666992 6.7172 6.40033 13.5172 13.3337 21.1172C20.267 28.7172 26.0003 35.2505 26.0003 35.5172C26.0003 35.6505 22.0003 36.0505 17.067 36.1839C9.46699 36.4505 7.73366 36.9839 4.80033 39.9172L1.33366 43.2505V90.0505V136.851L5.73366 140.717L10.0003 144.584H69.067H128.134L144 161.917C152.667 171.384 161.067 179.651 162.4 180.051C166.134 181.251 170.8 176.184 169.2 172.717C167.2 168.317 10.9337 0.850532 8.26699 0.0505316C6.93366 -0.216135 4.66699 0.583865 3.20033 2.05053Z" fill="black"/>
+<path d="M59.6004 36.718C60.267 38.1846 143.734 127.918 144.934 128.318C145.467 128.585 146 125.785 146 122.051C146 118.318 146.267 115.251 146.667 115.251C147.067 115.251 155.734 119.385 166 124.585C176.267 129.651 185.734 133.918 187.2 133.918C193.734 133.918 194 132.451 194 90.8513C194 57.6513 193.734 51.3846 191.867 48.8513C190.8 47.2513 188.934 45.918 187.867 45.918C186.8 45.918 177.067 50.4513 166.134 55.918L146.267 65.7846L145.867 54.5846C145.334 44.5846 144.934 42.8513 142 39.918L138.534 36.5846L98.9337 36.1846C77.2004 36.0513 59.467 36.318 59.6004 36.718Z" fill="black"/>
+</svg>`;
+    }
+
+    function getEnabledCameraIcon() {
+      return `<svg width="194" height="109" viewBox="0 0 194 109" fill="none" class="w-5 h-5" xmlns="http://www.w3.org/2000/svg">
+<path d="M3.46667 4.71731L0 8.85065V53.384C0 101.784 0.266667 103.784 7.33333 106.984C9.86667 108.184 27.7333 108.584 73.3333 108.584H135.733L139.867 105.117C143.867 101.784 144 101.384 144 90.4507C144 83.784 144.533 79.2506 145.333 79.2506C146.133 79.2506 155.2 83.5173 165.467 88.7173C175.867 93.784 185.6 97.9173 187.067 97.6507C192.667 96.8507 193.333 92.7173 193.333 54.3173C193.333 34.4506 192.8 16.584 192.133 14.8506C189.733 8.58398 186.667 9.25065 165.467 19.9173C154.4 25.384 145.067 29.9173 144.667 29.9173C144.267 29.9173 144 24.584 144 18.184C144 -1.01602 150.4 0.583979 72.4 0.583979H6.93333L3.46667 4.71731Z" fill="black"/>
+</svg>
+`;
+    }
+
     // Add this function to update the play/pause icon
     function updatePlayPauseIcon() {
       const playPauseBtn = document.getElementById("play-pause");
 
       if (player.paused) {
         // Show play icon
-        playPauseBtn.innerHTML = `
-      <svg width="18" height="21" viewBox="0 0 18 21" class="w-5 h-5" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M1.93262 1.39844L15.7453 10.278L1.93262 19.1576V1.39844Z" fill="#111827" stroke="#111827" stroke-width="2.73217" stroke-linecap="round" stroke-linejoin="round"></path>
-      </svg>
-    `;
+        playPauseBtn.innerHTML = getPlayIcon();
       } else {
         // Show pause icon
-        playPauseBtn.innerHTML = `
-      <svg width="18" height="21" viewBox="0 0 18 21" class="w-5 h-5" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M2.93262 1.39844H6.93262V19.1576H2.93262V1.39844Z" fill="#111827" stroke="#111827" stroke-width="2.73217" stroke-linecap="round" stroke-linejoin="round"></path>
-        <path d="M11.9326 1.39844H15.9326V19.1576H11.9326V1.39844Z" fill="#111827" stroke="#111827" stroke-width="2.73217" stroke-linecap="round" stroke-linejoin="round"></path>
-      </svg>
-    `;
+        playPauseBtn.innerHTML = getPauseIcon();
       }
     }
 
-    // Create volume slider container
-function createVolumeSlider() {
-  // Create container for the volume slider
-  volumeContainer = document.createElement("div")
-  volumeContainer.className =
-    "volume-slider-container absolute bottom-10 bg-white shadow-md rounded p-2 flex flex-col items-center"
-  volumeContainer.style.width = "40px"
-  volumeContainer.style.height = "120px"
-
-  // Create the volume slider
-  const volumeSlider = document.createElement("input")
-  volumeSlider.type = "range"
-  volumeSlider.min = "0"
-  volumeSlider.max = "1"
-  volumeSlider.step = "0.01"
-  volumeSlider.value = player.volume
-  volumeSlider.className = "w-full h-[80px] appearance-none bg-gray-200 rounded-full"
-  volumeSlider.style.writingMode = "bt-lr" /* IE */
-  volumeSlider.style.WebkitAppearance = "slider-vertical" /* WebKit */
-  volumeSlider.style.transform = "rotate(180deg)"
-
-  // Use Plyr's built-in volume control
-  volumeSlider.addEventListener("input", (e) => {
-    const newVolume = Number.parseFloat(e.target.value)
-    player.volume = newVolume // This uses Plyr's built-in volume control
-  })
-
-  volumeContainer.appendChild(volumeSlider)
-
-  // Position the volume slider relative to the volume button
-  const buttonRect = volumeControlBtn.getBoundingClientRect()
-  volumeContainer.style.left = `${buttonRect.left}px`
-
-  // Add the volume slider to the DOM
-  document.querySelector(".custom-controls").appendChild(volumeContainer)
-}
-
-// Update volume icon based on volume level
-function updateVolumeIcon() {
-  const isMuted = player.muted || player.volume === 0
-  const volume = player.volume
-
-  if (isMuted) {
-    // Muted icon
-    volumeControlBtn.innerHTML = `
-      <svg width="23" height="17" viewBox="0 0 23 17" class="w-5 h-5" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M10.2336 2.00122L5.40303 5.86568H1.53857V11.6624H5.40303L10.2336 15.5268V2.00122Z" fill="#111827"></path>
-        <path d="M21.5 6L14 13.5" stroke="#111827" stroke-width="2" stroke-linecap="round"></path>
-        <path d="M14 6L21.5 13.5" stroke="#111827" stroke-width="2" stroke-linecap="round"></path>
-      </svg>
-    `
-  } else if (volume < 0.5) {
-    // Low volume icon
-    volumeControlBtn.innerHTML = `
-      <svg width="23" height="17" viewBox="0 0 23 17" class="w-5 h-5" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M10.2336 2.00122L5.40303 5.86568H1.53857V11.6624H5.40303L10.2336 15.5268V2.00122Z" fill="#111827"></path>
-        <path d="M14.6198 5.34398C15.5254 6.24984 16.0341 7.4783 16.0341 8.75919C16.0341 10.0401 15.5254 11.2685 14.6198 12.1744" stroke="#111827" stroke-width="2.73217" stroke-linecap="round" stroke-linejoin="round"></path>
-      </svg>
-    `
-  } else {
-    // Full volume icon
-    volumeControlBtn.innerHTML = `
-      <svg width="23" height="17" viewBox="0 0 23 17" class="w-5 h-5" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M10.2336 2.00122L5.40303 5.86568H1.53857V11.6624H5.40303L10.2336 15.5268V2.00122Z" fill="#111827"></path>
-        <path d="M18.0301 1.93359C19.8413 3.74533 20.8588 6.20223 20.8588 8.76402C20.8588 11.3258 19.8413 13.7827 18.0301 15.5944M14.6198 5.34398C15.5254 6.24984 16.0341 7.4783 16.0341 8.75919C16.0341 10.0401 15.5254 11.2685 14.6198 12.1744M10.2336 2.00122L5.40303 5.86568H1.53857V11.6624H5.40303L10.2336 15.5268V2.00122Z" stroke="#111827" stroke-width="2.73217" stroke-linecap="round" stroke-linejoin="round"></path>
-      </svg>
-    `
-  }
-}
-
-// Toggle volume slider visibility
-function toggleVolumeSlider() {
-  if (volumeSliderVisible) {
-    if (volumeContainer) {
-      volumeContainer.remove()
-      volumeContainer = null
+    // Toggle Video
+    toggleVideoEl.addEventListener("click", () => {
+      videoEl.classList.toggle("opacity-0");
+      if (videoEl.classList.contains("opacity-0")) {
+        toggleVideoEl.innerHTML = getEnabledCameraIcon();
+    } else {
+      toggleVideoEl.innerHTML = getDisabledCameraIcon();
     }
-    volumeSliderVisible = false
-  } else {
-    createVolumeSlider()
-    volumeSliderVisible = true
-  }
-}
-
-// Toggle mute when double-clicking the volume button
-volumeControlBtn.addEventListener("dblclick", () => {
-  if (player.muted) {
-    player.muted = false
-  } else {
-    player.muted = true
-  }
-})
-
-// Add click event listener to volume control button
-volumeControlBtn.addEventListener("click", (e) => {
-  e.stopPropagation()
-  toggleVolumeSlider()
-})
-
-// Close volume slider when clicking outside
-document.addEventListener("click", (e) => {
-  if (volumeSliderVisible && e.target !== volumeControlBtn && !volumeContainer.contains(e.target)) {
-    toggleVolumeSlider()
-  }
-})
-
-// Listen to Plyr's volume change event to update the icon
-player.on("volumechange", () => {
-  updateVolumeIcon()
-
-  // Update slider value if it exists
-  if (volumeContainer) {
-    const slider = volumeContainer.querySelector('input[type="range"]')
-    if (slider) {
-      slider.value = player.volume
-    }
-  }
-})
+    });
 
     // Add these event listeners to sync the UI with player state
     player.on("play", () => {
@@ -374,7 +283,6 @@ player.on("volumechange", () => {
 
     // Initialize the icon state
     updatePlayPauseIcon();
-    updateVolumeIcon()
 
     rewindBtn.addEventListener("click", () => {
       player.rewind(10); // Rewind 10 seconds

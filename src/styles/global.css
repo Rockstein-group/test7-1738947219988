@@ -55,6 +55,10 @@ input[type="range"].w-full:focus {
   transition: all 0.2s ease;
 }
 
+.plyr.plyr--full-ui {
+  @apply h-full;
+}
+
 /* .plyr__controls {
   @apply !relative w-full flex justify-between order-1;
 } */

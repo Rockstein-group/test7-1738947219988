@@ -7,7 +7,7 @@ import { engagement_image_1, engagement_image_2 } from "../../generated/images";
 
 <section
   id="engagement"
-  class="bg-[#243946] pt-10 md:py-36 relative px-4 text-white"
+  class="bg-[#243946] py-10 md:py-36 relative px-4 text-white"
 >
   <div class="container mx-auto md:gap-10 text-center flex flex-col gap-8">
     <h2 class="font-bold text-4xl md:text-[50px] leading-[1.5]">
@@ -33,8 +33,8 @@ import { engagement_image_1, engagement_image_2 } from "../../generated/images";
         <circle cx="13" cy="91.5562" r="12.5" fill="#96F50A"></circle>
       </svg>
     </span>
-    <div class="flex gap-14 items-end">
-      <div class="flex flex-col gap-10">
+    <div class="flex flex-wrap xl:flex-nowrap gap-14 items-end">
+      <div class="flex flex-col gap-10 w-full xl:w-auto">
         <EngagementItem number="1">
           <p class="text-xl leading-[1.5] text-start">
             <span class="font-bold"
@@ -76,15 +76,18 @@ import { engagement_image_1, engagement_image_2 } from "../../generated/images";
           </p>
         </EngagementItem>
       </div>
-      <Image
+      <div class="w-full xl:w-auto">
+        <Image
         src={engagement_image_1}
         width={442}
         height={442}
+        class="mx-auto"
         alt="Engagement Image 1"
       />
+      </div>
     </div>
-    <div class="flex gap-4 md:gap-36 items-center flex-row-reverse">
-      <div class="flex flex-col gap-10">
+    <div class="flex flex-wrap xl:flex-nowrap gap-8 md:gap-36 items-center flex-row-reverse">
+      <div class="flex flex-col gap-10 w-full xl:w-auto">
         <EngagementItem number="4">
           <p class="text-xl leading-[1.5] text-start">
             <span class="font-bold">Une navigation instantanée</span> - Une expérience fluide et agréable.
@@ -101,12 +104,15 @@ import { engagement_image_1, engagement_image_2 } from "../../generated/images";
           </p>
         </EngagementItem>
       </div>
-      <Image
+      <div class="w-full xl:w-auto">
+        <Image
         src={engagement_image_2}
         width={439}
         height={365}
+        class="mx-auto"
         alt="Engagement Image 2"
       />
+      </div>
     </div>
   </div>
 </section>
